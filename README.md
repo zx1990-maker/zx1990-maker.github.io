@@ -1,4 +1,9 @@
-<div class="custom-sidebar" style="position: fixed; top: 260px; left: calc(50% - 430px); width: 200px; z-index: 999;">
+<div class="custom-sidebar" style="position: fixed; top: 250px; left: calc(50% - 430px); width: 200px; z-index: 999; text-align: left;">
+  
+  <div style="margin-bottom: 25px;">
+    <img src="avatar.png" alt="My Avatar" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid #e1e4e8; box-shadow: 0 4px 8px rgba(0,0,0,0.05);">
+  </div>
+
   <p style="font-weight: bold; color: #232b2f; margin-bottom: 12px; font-size: 16px;">🧭 文章分类导航</p>
   <ul style="list-style: none; padding-left: 0; margin: 0;">
     <li style="margin-bottom: 12px; list-style: none;"><a href="#-技术笔记" style="color: #0066cc; text-decoration: none; font-size: 15px;">💻 技术笔记</a></li>
