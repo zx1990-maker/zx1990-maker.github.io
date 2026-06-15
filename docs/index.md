@@ -30,7 +30,6 @@
 
 ## 📬 找到我
 
-- **GitHub**: [@your-username](https://github.com)
 
 ---
 <p align="center">感谢相遇 ✨</p>
