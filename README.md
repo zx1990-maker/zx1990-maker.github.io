@@ -1,6 +1,6 @@
 <div class="custom-sidebar" style="position: fixed; top: 250px; left: calc(50% - 430px); width: 200px; z-index: 999; text-align: left;">
   
-  <div style="margin-bottom: 15px;">
+  <div style="margin-bottom: 25px;">
     <img src="avatar.png" alt="My Avatar" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid #e1e4e8; box-shadow: 0 4px 8px rgba(0,0,0,0.05);">
   </div>
 
