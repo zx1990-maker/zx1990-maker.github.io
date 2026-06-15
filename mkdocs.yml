@@ -1,11 +1,66 @@
-theme: jekyll-theme-hacker
-title: 🚀 我的个人博客
-description: |
-  欢迎来到我的分享空间 👋
-  
-  ---
-  🧭 **文章分类导航**
-  - [💻 学习笔记](#-学习笔记)
-  - [📚 读书感悟](#-读书感悟)
-  - [✈️ 旅行生活](#-旅行生活)
-  - [🧗 运动项目](#-运动项目)
+# [基础信息配置]
+site_name: 🚀 我的个人博客
+site_url: https://zx1990-maker.github.io
+site_author: 你的名字
+site_description: 欢迎来到我的分享空间 👋
+
+# [右侧右上角 GitHub 图标链接，改写成你自己的仓库]
+repo_url: https://github.com/zx1990-maker/zx1990-maker.github.io
+repo_name: zx1990-maker.github.io
+
+# [完美精简版导航 - 只保留你的四大分类]
+nav:
+  - 🏠 首页: index.md
+  - 💻 技术笔记:
+    - 介绍: TECH/index.md
+    - 我的第一篇博客文章: TECH/post1.md
+  - 📚 读书感悟:
+    - 介绍: READ/index.md
+  - ✈️ 旅行生活:
+    - 介绍: TRAVEL/index.md
+  - 🧗 运动项目:
+    - 介绍: SPORT/index.md
+
+# [界面与高级主题美化]
+theme:
+  name: material
+  language: zh  # 界面汉化
+  palette:
+    # 日间模式
+    - scheme: default
+      primary: indigo
+      accent: orange
+      toggle:
+        icon: material/weather-night
+        name: 切换至夜间模式
+    # 夜间模式
+    - scheme: slate
+      primary: indigo
+      accent: orange
+      toggle:
+        icon: material/weather-sunny
+        name: 切换至日间模式
+  features:
+    - navigation.tabs      # 顶部横向大 Tab 分类栏
+    - navigation.top       # 自动回到顶部按钮
+    - navigation.indexes   # 分类允许拥有单独的首页
+    - navigation.expand    # 左侧侧边栏目录自动展开
+    - search.suggest       # 搜索智能提示
+    - search.highlight     # 搜索关键词高亮
+    - content.code.copy    # 代码块一键复制按钮
+
+# [插件与 Markdown 语法扩展扩展支持]
+plugins:
+  - search:
+      lang: [zh, en]       # 完美支持中文、英文全局实时搜索
+markdown_extensions:
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+  - pymdownx.highlight:
+      linenums: true       # 代码块显示行号
+      auto_title: true     # 代码自动识别语言名称
+  - pymdownx.superfences
+  - admonition             # 支持炫酷的高亮提示框
+  - pymdownx.details       # 支持原生折叠面板
