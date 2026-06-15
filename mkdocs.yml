@@ -15,7 +15,7 @@ nav:
     - 介绍: TECH/index.md
     - 我的第一篇博客文章: TECH/post1.md
     - Leetcode: TECH/Leetcode/index.md
-      - 20. Valid Parentheses: TECH/Leetcode/20. Valid Parentheses.md
+        - 20. Valid Parentheses: TECH/Leetcode/20. Valid Parentheses.md
   - 📚 读书感悟:
     - 介绍: READ/index.md
   - ✈️ 旅行生活:
