@@ -1,7 +1,7 @@
 # 👋 欢迎来到我的个人博客
 
 <p align="center">
-  <img src="avatar.png" alt="Avatar" width="120px" style="border-radius: 50%;">
+  <img src="./avatar.png" alt="Avatar" width="120px" style="border-radius: 50%;">
 </p>
 
 <h3 align="center">Zixuan</h3>
