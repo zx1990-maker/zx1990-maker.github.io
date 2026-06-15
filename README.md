@@ -9,7 +9,7 @@
     <li style="margin-bottom: 12px; list-style: none;"><a href="#-技术笔记" style="color: #0066cc; text-decoration: none; font-size: 15px;">💻 技术笔记</a></li>
     <li style="margin-bottom: 12px; list-style: none;"><a href="#-读书感悟" style="color: #0066cc; text-decoration: none; font-size: 15px;">📚 读书感悟</a></li>
     <li style="margin-bottom: 12px; list-style: none;"><a href="#-旅行生活" style="color: #0066cc; text-decoration: none; font-size: 15px;">✈️ 旅行生活</a></li>
-    <li style="margin-bottom: 12px; list-style: none;"><a href="#-运动项目" style="color: #0066cc; text-decoration: none; font-size: 15px;">🧗 运动项目</a></li>
+    <li style="margin-bottom: 12px; list-style: none;"><a href="#-运动项目" style="color: #0066cc; text-decoration: none; font-size: 15px;">🏂 运动项目</a></li>
   </ul>
 </div>
 
