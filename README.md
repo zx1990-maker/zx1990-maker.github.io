@@ -1,6 +1,6 @@
 <div class="custom-sidebar" style="position: fixed; top: 250px; left: calc(50% - 430px); width: 200px; z-index: 999; text-align: left;">
   
-  <div style="margin-bottom: 25px;">
+  <div style="margin-bottom: 15px;">
     <img src="avatar.png" alt="My Avatar" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid #e1e4e8; box-shadow: 0 4px 8px rgba(0,0,0,0.05);">
   </div>
 
@@ -28,7 +28,7 @@
 ---
 
 ## 💻 技术笔记
-这里记录我的编程学习、技术踩坑和项目经验。
+这里记录我的编程学习、技术和项目经验。
 - [我的第一篇博客文章](post1.md) - 2026年6月15日
 
 ---
