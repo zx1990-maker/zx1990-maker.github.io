@@ -14,6 +14,9 @@ nav:
   - 💻 技术笔记:
     - 介绍: TECH/index.md
     - 我的第一篇博客文章: TECH/post1.md
+    - Data Science本科课程:
+      - Data Structuries: 
+        - Dictionaries & Hashing：TECH/Data Science本科课程/Data Structuries数据结构/Dictionaries & Hashing/Lecture.md
     - Leetcode: 
       - 介绍：TECH/Leetcode/index.md
       - 20. Valid Parentheses: TECH/Leetcode/20. Valid Parentheses.md
