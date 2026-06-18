@@ -71,3 +71,25 @@ markdown_extensions:
   - pymdownx.superfences
   - admonition             # 支持炫酷的高亮提示框
   - pymdownx.details       # 支持原生折叠面板
+# 核心：加入 Markdown 扩展插件
+markdown_extensions:
+  # 1. 支持标准表格（笔记中的对比表格需要它）
+  - tables
+  
+  # 2. 支持数学公式 (LaTeX) 的核心扩展
+  - pymdownx.arithmatex:
+      generic: true
+
+  # 3. 支持高级代码块高亮（让你的 md 代码框更好看）
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+
+# 核心：为了让数学公式在网页上真正渲染出来，需要引入 MathJax 脚本
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
