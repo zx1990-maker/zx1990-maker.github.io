@@ -22,18 +22,21 @@ nav:
           - Recursion: TECH/Data Science课程/Data Structures数据结构/Tree/Recursion.md
     - Leetcode: 
       - 介绍: TECH/Leetcode/index.md
-      - 20. Valid Parentheses: TECH/Leetcode/20. Valid Parentheses.md
-      - 230. Kth Smallest Element in a BST: TECH/Leetcode/230. Kth Smallest Element in a BST.md
-      - 236. Lowest Common Ancestor of a Binary Tree: TECH/Leetcode/236. Lowest Common Ancestor of a Binary Tree.md
-      - 701. Insert into a Binary Search Tree: TECH/Leetcode/701. Insert into a Binary Search Tree.md
-      - 98. Validate Binary Search Tree: TECH/Leetcode/98. Validate Binary Search Tree.md
-      - 450. Delete Node in a BST: TECH/Leetcode/450. Delete Node in a BST.md
-      - 105. Construct Binary Tree from Preorder and Inorder Traversal: TECH/Leetcode/105. Construct Binary Tree from Preorder and Inorder Traversal.md
-      - 106. Construct Binary Tree from Inorder and Postorder Traversal: TECH/Leetcode/106. Construct Binary Tree from Inorder and Postorder Traversal.md
-      - 297. Serialize and Deserialize Binary Tree: TECH/Leetcode/297. Serialize and Deserialize Binary Tree.md
-      - 108. Convert Sorted Array to Binary Search Tree: TECH/Leetcode/108. Convert Sorted Array to Binary Search Tree.md
-      - 110. Balanced Binary Tree: TECH/Leetcode/110. Balanced Binary Tree.md
-      - 1382. Balance a Binary Search Tree: TECH/Leetcode/1382. Balance a Binary Search Tree.md
+      - Tree:
+        - Tree Algo: TECH/Leetcode/Tree.md
+        - Tree Answer:
+          - 20. Valid Parentheses: TECH/Leetcode/20. Valid Parentheses.md
+          - 230. Kth Smallest Element in a BST: TECH/Leetcode/230. Kth Smallest Element in a BST.md
+          - 236. Lowest Common Ancestor of a Binary Tree: TECH/Leetcode/236. Lowest Common Ancestor of a Binary Tree.md
+          - 701. Insert into a Binary Search Tree: TECH/Leetcode/701. Insert into a Binary Search Tree.md
+          - 98. Validate Binary Search Tree: TECH/Leetcode/98. Validate Binary Search Tree.md
+          - 450. Delete Node in a BST: TECH/Leetcode/450. Delete Node in a BST.md
+          - 105. Construct Binary Tree from Preorder and Inorder Traversal: TECH/Leetcode/105. Construct Binary Tree from Preorder and Inorder Traversal.md
+          - 106. Construct Binary Tree from Inorder and Postorder Traversal: TECH/Leetcode/106. Construct Binary Tree from Inorder and Postorder Traversal.md
+          - 297. Serialize and Deserialize Binary Tree: TECH/Leetcode/297. Serialize and Deserialize Binary Tree.md
+          - 108. Convert Sorted Array to Binary Search Tree: TECH/Leetcode/108. Convert Sorted Array to Binary Search Tree.md
+          - 110. Balanced Binary Tree: TECH/Leetcode/110. Balanced Binary Tree.md
+          - 1382. Balance a Binary Search Tree: TECH/Leetcode/1382. Balance a Binary Search Tree.md
   - 📹 摄影技术:
     - 介绍: PHOTOGRAPHY/index.md
   - 🎵 音乐鉴赏:
