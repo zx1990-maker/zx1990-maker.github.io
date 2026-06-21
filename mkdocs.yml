@@ -46,6 +46,12 @@ nav:
     - 介绍: MUSIC/index.md
   - 🏂 运动项目:
     - 介绍: SPORT/index.md
+    - Eq:
+      - CEA分级: SPORT/Equestrian/CEA分级.md
+    - Bd:
+      - 常见损伤和运动康复: SPORT/Badminton/运动康复.md
+    - Snowboarding: 
+      - 国内外滑雪场: SPORT/Snowboarding/国内外雪场.md
 
 # [界面与高级主题美化]
 theme:
