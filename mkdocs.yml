@@ -24,6 +24,8 @@ nav:
       - 介绍: TECH/Leetcode/index.md
       - Tree:
         - Hashing & Dictionary: TECH/Leetcode/Hashing & Dictionary.md
+        - H & D: 
+          - 1. Two Sum: docs/TECH/Leetcode/1. Two Sum.md
         - Tree Algo: TECH/Leetcode/Tree.md
         - Tree Answer:
           - 20. Valid Parentheses: TECH/Leetcode/20. Valid Parentheses.md
