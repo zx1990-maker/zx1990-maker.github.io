@@ -1,0 +1,37 @@
+name: Deploy MkDocs Site
+
+# 1. 触发条件：当 main 分支有代码 push 进来时执行
+on:
+  push:
+    branches:
+      - main  # 如果你的主分支叫 master，请改为 master
+
+# 2. 允许这个脚本修改 GitHub Pages 的内容
+permissions:
+  contents: write
+
+# 3. 具体要做的事情（任务）
+jobs:
+  deploy:
+    runs-on: ubuntu-latest # 在 Linux 服务器上运行
+    steps:
+      # 步骤一：把你的代码下载到这台服务器上
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 步骤二：安装 Python 环境
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      # 步骤三：安装 MkDocs、主题和你的 PDF 插件
+      - name: Install dependencies
+        run: |
+          pip install mkdocs-material
+          pip install mkdocs-pdf-embed-plugin
+
+      # 步骤四：运行部署命令（MkDocs 自带的部署命令，会自动编译并推送到 gh-pages 分支）
+      - name: Deploy to GitHub Pages
+        run: |
+          mkdocs gh-deploy --force
