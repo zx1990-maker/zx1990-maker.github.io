@@ -16,7 +16,7 @@ nav:
     - 我的第一篇博客文章: TECH/post1.md
     - Data Science课程:
       - Data Structures: 
-        - 复习笔记: TECH/Data Science课程/复习笔记.pdf
+        - 复习笔记: TECH/Data Science课程/复习笔记.md
         - Dictionaries & Hashing: 
           - Lecture: TECH/Data Science课程/Data Structures数据结构/Dictionaries & Hashing/Lecture.md
         - Tree:
