@@ -15,7 +15,7 @@ nav:
     - 介绍: TECH/index.md
     - 我的第一篇博客文章: TECH/post1.md
     - PE实习: 
-      - Enhanced Index Strategy: TECH/PE/指增产品评价指标理解.md
+      - Enhanced Index Strategy: TECH/量化实习/指增产品评价指标理解.md
       - Quant Strategies: TECH/量化实习/量化策略与评价指标总结.md
       - 投研框架: TECH/量化实习/投研框架.md
     - Data Science课程:
