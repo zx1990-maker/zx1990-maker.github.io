@@ -1,0 +1,2816 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="欢迎来到我的分享空间 👋">
+      
+      
+        <meta name="author" content="Zixuan">
+      
+      
+        <link rel="canonical" href="https://zx1990-maker.github.io/TECH/%E9%87%8F%E5%8C%96%E5%AE%9E%E4%B9%A0/%E9%87%8F%E5%8C%96%E7%AD%96%E7%95%A5%E4%B8%8E%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87%E6%80%BB%E7%BB%93/">
+      
+      
+        <link rel="prev" href="../%E6%8C%87%E5%A2%9E%E4%BA%A7%E5%93%81%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87%E7%90%86%E8%A7%A3/">
+      
+      
+        <link rel="next" href="../%E6%8A%95%E7%A0%94%E6%A1%86%E6%9E%B6/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Quant Strategies - 我的个人博客</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="我的个人博客" class="md-header__button md-logo" aria-label="我的个人博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            我的个人博客
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Quant Strategies
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="orange"  aria-label="切换至夜间模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换至夜间模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="orange"  aria-label="切换至日间模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换至日间模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/zx1990-maker/zx1990-maker.github.io" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    zx1990-maker.github.io
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  🏠 首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  💻 技术笔记
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../SPORT/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  🏂 运动项目
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="我的个人博客" class="md-nav__button md-logo" aria-label="我的个人博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    我的个人博客
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/zx1990-maker/zx1990-maker.github.io" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    zx1990-maker.github.io
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🏠 首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    💻 技术笔记
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    💻 技术笔记
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../post1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    我的第一篇博客文章
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    私募基金实习
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    私募基金实习
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%8C%87%E5%A2%9E%E4%BA%A7%E5%93%81%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87%E7%90%86%E8%A7%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enhanced Index Strategy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quant Strategies
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%8A%95%E7%A0%94%E6%A1%86%E6%9E%B6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    投研框架
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Science课程
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Data Science课程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4_1" id="__nav_2_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Structures
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Data Structures
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Data%20Science%E8%AF%BE%E7%A8%8B/%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习笔记
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_4_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4_1_2" id="__nav_2_4_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dictionaries & Hashing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_4_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Dictionaries & Hashing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Data%20Science%E8%AF%BE%E7%A8%8B/Data%20Structures%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/Dictionaries%20%26%20Hashing/Lecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_4_1_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4_1_3" id="__nav_2_4_1_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tree
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_4_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tree
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Data%20Science%E8%AF%BE%E7%A8%8B/Data%20Structures%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/Tree/Recursion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recursion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../Leetcode/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Leetcode
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Leetcode
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Leetcode/Hashing%20%26%20Dictionary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hashing & Dictionary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5_3" id="__nav_2_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    H & D
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    H & D
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/TECH/Leetcode/1. Two Sum.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Two Sum
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Leetcode/349.%20Intersection%20of%20Two%20Arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    349. Intersection of Two Arrays
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Leetcode/128.%20Longest%20Consecutive%20Sequence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    128. Longest Consecutive Sequence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Leetcode/217.%20Contains%20Duplicate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    217. Contains Duplicate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Leetcode/387.%20First%20Unique%20Character%20in%20a%20String/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    387. First Unique Character in a String
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Leetcode/347.%20Top%20K%20Frequent%20Elements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    347. Top K Frequent Elements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Leetcode/Tree/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tree Algo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_5_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5_5" id="__nav_2_5_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tree Answer
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_5_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tree Answer
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Leetcode/20.%20Valid%20Parentheses/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    20. Valid Parentheses
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Leetcode/230.%20Kth%20Smallest%20Element%20in%20a%20BST/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    230. Kth Smallest Element in a BST
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Leetcode/236.%20Lowest%20Common%20Ancestor%20of%20a%20Binary%20Tree/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    236. Lowest Common Ancestor of a Binary Tree
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Leetcode/701.%20Insert%20into%20a%20Binary%20Search%20Tree/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    701. Insert into a Binary Search Tree
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Leetcode/98.%20Validate%20Binary%20Search%20Tree/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    98. Validate Binary Search Tree
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Leetcode/450.%20Delete%20Node%20in%20a%20BST/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    450. Delete Node in a BST
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Leetcode/105.%20Construct%20Binary%20Tree%20from%20Preorder%20and%20Inorder%20Traversal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    105. Construct Binary Tree from Preorder and Inorder Traversal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Leetcode/106.%20Construct%20Binary%20Tree%20from%20Inorder%20and%20Postorder%20Traversal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    106. Construct Binary Tree from Inorder and Postorder Traversal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Leetcode/297.%20Serialize%20and%20Deserialize%20Binary%20Tree/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    297. Serialize and Deserialize Binary Tree
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Leetcode/108.%20Convert%20Sorted%20Array%20to%20Binary%20Search%20Tree/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    108. Convert Sorted Array to Binary Search Tree
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Leetcode/110.%20Balanced%20Binary%20Tree/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    110. Balanced Binary Tree
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Leetcode/1382.%20Balance%20a%20Binary%20Search%20Tree/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1382. Balance a Binary Search Tree
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../SPORT/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🏂 运动项目
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🏂 运动项目
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eq
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Eq
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../SPORT/Equestrian/CEA%E5%88%86%E7%BA%A7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CEA分级
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bd
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Bd
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../SPORT/Badminton/%E8%BF%90%E5%8A%A8%E5%BA%B7%E5%A4%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    常见损伤和运动康复
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Snowboarding
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Snowboarding
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../SPORT/Snowboarding/%E5%9B%BD%E5%86%85%E5%A4%96%E9%9B%AA%E5%9C%BA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    国内外滑雪场
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="_1">量化策略与评价指标总结</h1>
+<blockquote>
+<p>一份面向初学者的量化策略速查手册，包含<strong>专业解释 + 通俗理解（老奶奶版）+ 核心评价指标</strong>。</p>
+</blockquote>
+<hr />
+<h1 id="_2">一、五大类量化策略</h1>
+<table>
+<thead>
+<tr>
+<th>策略</th>
+<th>核心思想</th>
+<th>收益来源</th>
+<th>核心评价指标</th>
+<th>最怕什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CTA</td>
+<td>顺势交易期货</td>
+<td>趋势行情</td>
+<td>年化收益、最大回撤、夏普、卡玛</td>
+<td>震荡行情</td>
+</tr>
+<tr>
+<td>市场中性</td>
+<td>买强卖弱，对冲市场风险</td>
+<td>Alpha</td>
+<td>Alpha、Beta、回撤、波动率、对冲成本</td>
+<td>模型失效、极端行情</td>
+</tr>
+<tr>
+<td>混合策略</td>
+<td>多种策略组合</td>
+<td>分散收益来源</td>
+<td>组合收益、组合回撤、相关性</td>
+<td>策略高度相关</td>
+</tr>
+<tr>
+<td>量化选股</td>
+<td>模型挑选股票</td>
+<td>股票超额收益</td>
+<td>年化收益、回撤、换手率、风格暴露</td>
+<td>风格失效</td>
+</tr>
+<tr>
+<td>指数增强</td>
+<td>跟踪指数并争取跑赢</td>
+<td>超额收益</td>
+<td>超额收益、IR、跟踪误差</td>
+<td>超额收益消失</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="_3">二、各种策略详解</h1>
+<h2 id="1-cta">1. CTA（趋势跟踪策略）</h2>
+<h3 id="_4">专业解释</h3>
+<p>CTA（Commodity Trading Advisor）主要利用量化模型交易：</p>
+<ul>
+<li>商品期货</li>
+<li>股指期货</li>
+<li>国债期货等</li>
+</ul>
+<p>最常见的方法是<strong>趋势跟踪</strong>：</p>
+<ul>
+<li>上涨 → 做多</li>
+<li>下跌 → 做空</li>
+</ul>
+<p>赚的是<strong>方向判断正确的钱</strong>。</p>
+<h3 id="_5">老奶奶版</h3>
+<p>就像看人群走路：</p>
+<ul>
+<li>大家往东走，它跟着往东。</li>
+<li>大家往西走，它跟着往西。</li>
+</ul>
+<p>赚的是：</p>
+<blockquote>
+<p><strong>方向走对的钱。</strong></p>
+</blockquote>
+<h3 id="_6">核心评价指标</h3>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>看什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>年化收益</td>
+<td>一年大概赚多少</td>
+</tr>
+<tr>
+<td>最大回撤</td>
+<td>最惨时亏多少</td>
+</tr>
+<tr>
+<td>夏普比率</td>
+<td>波动承担得值不值</td>
+</tr>
+<tr>
+<td>卡玛比率</td>
+<td>收益和最大亏损是否划算</td>
+</tr>
+<tr>
+<td>趋势行情表现</td>
+<td>大涨大跌时是否赚钱</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_7">最怕什么？</h3>
+<p><strong>震荡行情。</strong></p>
+<h4 id="_8">老奶奶版</h4>
+<p>人一会往东，一会往西。</p>
+<p>CTA不停跟着跑，</p>
+<p>最后容易<strong>来回挨打</strong>。</p>
+<hr />
+<h2 id="2-market-neutral">2. 市场中性策略（Market Neutral）</h2>
+<h3 id="_9">专业解释</h3>
+<p>同时：</p>
+<ul>
+<li>买入强股票</li>
+<li>卖空弱股票</li>
+</ul>
+<p>尽量抵消整个市场涨跌，</p>
+<p>赚的是：</p>
+<blockquote>
+<p><strong>相对收益（Alpha）</strong></p>
+</blockquote>
+<h3 id="_10">老奶奶版</h3>
+<p>它不赌：</p>
+<blockquote>
+<p>菜市场整体涨价还是跌价。</p>
+</blockquote>
+<p>它赌的是：</p>
+<blockquote>
+<p>苹果会不会卖得比梨更好。</p>
+</blockquote>
+<p>苹果赢了梨，</p>
+<p>它就赚钱。</p>
+<h3 id="_11">核心评价指标</h3>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>看什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Alpha</td>
+<td>是否真正创造超额收益</td>
+</tr>
+<tr>
+<td>Beta</td>
+<td>是否受市场影响</td>
+</tr>
+<tr>
+<td>最大回撤</td>
+<td>最惨亏多少</td>
+</tr>
+<tr>
+<td>波动率</td>
+<td>收益是否平稳</td>
+</tr>
+<tr>
+<td>对冲成本</td>
+<td>控制风险付出的代价</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_12">最怕什么？</h3>
+<ul>
+<li>模型失效</li>
+<li>对冲成本上涨</li>
+<li>极端行情</li>
+</ul>
+<h4 id="_13">老奶奶版</h4>
+<p>原来以为苹果比梨好卖，</p>
+<p>结果梨突然卖疯了。</p>
+<hr />
+<h2 id="3-multi-strategy">3. 混合策略（Multi-Strategy）</h2>
+<h3 id="_14">专业解释</h3>
+<p>把多种策略组合起来，例如：</p>
+<ul>
+<li>CTA</li>
+<li>市场中性</li>
+<li>套利</li>
+<li>股票多头</li>
+</ul>
+<p>目标：</p>
+<blockquote>
+<p><strong>降低波动，提高稳定性。</strong></p>
+</blockquote>
+<h3 id="_15">老奶奶版</h3>
+<p>不要只靠一种赚钱方式。</p>
+<p>像一个家庭：</p>
+<ul>
+<li>爸爸赚钱</li>
+<li>妈妈赚钱</li>
+<li>孩子以后也赚钱</li>
+</ul>
+<p>收入来源越多，</p>
+<p>生活越稳定。</p>
+<h3 id="_16">核心评价指标</h3>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>看什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>组合收益</td>
+<td>整体收益</td>
+</tr>
+<tr>
+<td>组合回撤</td>
+<td>最大亏损</td>
+</tr>
+<tr>
+<td>策略相关性</td>
+<td>是否一起涨跌</td>
+</tr>
+<tr>
+<td>收益稳定性</td>
+<td>各市场环境表现</td>
+</tr>
+<tr>
+<td>资金分配</td>
+<td>配置是否合理</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_17">最怕什么？</h3>
+<p>表面很多策略，</p>
+<p>实际上都押同一个方向。</p>
+<h4 id="_18">老奶奶版</h4>
+<p>一家三口都在同一家工厂上班。</p>
+<p>工厂倒了，</p>
+<p>三个人一起失业。</p>
+<hr />
+<h2 id="4">4. 量化选股</h2>
+<h3 id="_19">专业解释</h3>
+<p>利用模型从数千只股票中挑选最优股票。</p>
+<p>模型通常考虑：</p>
+<ul>
+<li>盈利能力</li>
+<li>估值</li>
+<li>成长性</li>
+<li>成交量</li>
+<li>趋势</li>
+<li>市场情绪</li>
+</ul>
+<p>等多种因子。</p>
+<h3 id="_20">老奶奶版</h3>
+<p>村里有 5000 棵苹果树。</p>
+<p>模型帮你挑出：</p>
+<p><strong>最好吃的 50 棵。</strong></p>
+<p>你只买这 50 棵。</p>
+<h3 id="_21">核心评价指标</h3>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>看什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>年化收益</td>
+<td>是否赚钱</td>
+</tr>
+<tr>
+<td>最大回撤</td>
+<td>最大亏损</td>
+</tr>
+<tr>
+<td>波动率</td>
+<td>是否稳定</td>
+</tr>
+<tr>
+<td>换手率</td>
+<td>是否交易过于频繁</td>
+</tr>
+<tr>
+<td>风格暴露</td>
+<td>是否依赖某一种市场风格</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_22">最怕什么？</h3>
+<p>误把风格收益当成选股能力。</p>
+<h4 id="_23">老奶奶版</h4>
+<p>你以为自己很会挑苹果。</p>
+<p>其实只是：</p>
+<p>今年小苹果特别贵。</p>
+<hr />
+<h2 id="5-enhanced-index">5. 指数增强（Enhanced Index）</h2>
+<h3 id="_24">专业解释</h3>
+<p>以指数为基础，例如：</p>
+<ul>
+<li>沪深300</li>
+<li>中证500</li>
+<li>中证1000</li>
+</ul>
+<p>总体跟踪指数，</p>
+<p>同时通过量化模型进行小幅优化，</p>
+<p>争取：</p>
+<blockquote>
+<p><strong>跑赢指数。</strong></p>
+</blockquote>
+<h3 id="_25">老奶奶版</h3>
+<p>普通指数基金：</p>
+<p>考 <strong>80 分。</strong></p>
+<p>指数增强：</p>
+<p>希望考 <strong>83～85 分。</strong></p>
+<p>不是重新考试，</p>
+<p>而是在标准答案上多拿几分。</p>
+<h3 id="_26">核心评价指标</h3>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>看什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>超额收益</td>
+<td>比指数多赚多少</td>
+</tr>
+<tr>
+<td>跟踪误差</td>
+<td>偏离指数程度</td>
+</tr>
+<tr>
+<td>信息比率（IR）</td>
+<td>超额收益是否值得</td>
+</tr>
+<tr>
+<td>胜率</td>
+<td>多长时间跑赢指数</td>
+</tr>
+<tr>
+<td>回撤</td>
+<td>最大亏损</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_27">最怕什么？</h3>
+<p>没有超额收益。</p>
+<h4 id="_28">老奶奶版</h4>
+<p>忙活一年，</p>
+<p>最后和普通指数基金一样。</p>
+<hr />
+<h1 id="_29">三、核心评价指标</h1>
+<h2 id="1-annual-return">1. 年化收益（Annual Return）</h2>
+<h3 id="_30">专业解释</h3>
+<p>把不同时间长度的收益，</p>
+<p>统一换算成：</p>
+<blockquote>
+<p>一年能赚多少。</p>
+</blockquote>
+<h3 id="_31">老奶奶版</h3>
+<p>无论赚了：</p>
+<ul>
+<li>3个月</li>
+<li>6个月</li>
+</ul>
+<p>最后都统一算：</p>
+<p>一年能挣多少钱。</p>
+<hr />
+<h2 id="2-maximum-drawdown">2. 最大回撤（Maximum Drawdown）</h2>
+<h3 id="_32">专业解释</h3>
+<p>资金从最高点跌到最低点，</p>
+<p>经历的最大亏损比例。</p>
+<h3 id="_33">老奶奶版</h3>
+<p>最高：</p>
+<p>100 万</p>
+<p>最低：</p>
+<p>70 万</p>
+<p>最大回撤：</p>
+<p><strong>30%</strong></p>
+<hr />
+<h2 id="3-volatility">3. 波动率（Volatility）</h2>
+<h3 id="_34">专业解释</h3>
+<p>收益上下波动程度。</p>
+<h3 id="_35">老奶奶版</h3>
+<p>像坐车。</p>
+<p>越颠，</p>
+<p>波动越大。</p>
+<hr />
+<h2 id="4-sharpe-ratio">4. 夏普比率（Sharpe Ratio）</h2>
+<h3 id="_36">专业解释</h3>
+<p>每承担一份波动，</p>
+<p>获得多少收益。</p>
+<h3 id="_37">老奶奶版</h3>
+<p>不是只看赚多少。</p>
+<p>更看：</p>
+<blockquote>
+<p>为了赚钱，</p>
+</blockquote>
+<p>值不值得受这些波动。</p>
+<blockquote>
+<p><strong>一句话：</strong></p>
+<p>波动率 = 有多颠。</p>
+<p>夏普 = 颠得值不值。</p>
+</blockquote>
+<hr />
+<h2 id="5-calmar-ratio">5. 卡玛比率（Calmar Ratio）</h2>
+<h3 id="_38">专业解释</h3>
+<blockquote>
+<p>年化收益 ÷ 最大回撤</p>
+</blockquote>
+<p>衡量收益是否值得承担最大亏损。</p>
+<h3 id="_39">老奶奶版</h3>
+<p>赚 20 万：</p>
+<ul>
+<li>最多亏 5 万 → 很划算</li>
+<li>最多亏 50 万 → 很吓人</li>
+</ul>
+<hr />
+<h2 id="6-alpha">6. Alpha</h2>
+<h3 id="_40">专业解释</h3>
+<p>不依赖市场上涨，</p>
+<p>策略自己创造的收益。</p>
+<h3 id="_41">老奶奶版</h3>
+<p>不是大家赚钱你才赚钱。</p>
+<p>而是：</p>
+<p>你自己有本事赚钱。</p>
+<hr />
+<h2 id="7-beta">7. Beta</h2>
+<h3 id="_42">专业解释</h3>
+<p>衡量策略受市场影响程度。</p>
+<ul>
+<li>Beta≈1：和市场差不多</li>
+<li>Beta≈0：基本不受市场影响</li>
+</ul>
+<h3 id="_43">老奶奶版</h3>
+<p>大盘打喷嚏，</p>
+<p>你会不会也感冒？</p>
+<hr />
+<h2 id="8-excess-return">8. 超额收益（Excess Return）</h2>
+<h3 id="_44">专业解释</h3>
+<p>策略收益 − 基准收益。</p>
+<p>例如：</p>
+<ul>
+<li>指数：10%</li>
+<li>策略：13%</li>
+</ul>
+<p>超额收益：</p>
+<p><strong>3%</strong></p>
+<h3 id="_45">老奶奶版</h3>
+<p>全班平均：</p>
+<p>80 分。</p>
+<p>你考：</p>
+<p>85 分。</p>
+<p>多出来的：</p>
+<p>5 分。</p>
+<hr />
+<h2 id="9-tracking-error">9. 跟踪误差（Tracking Error）</h2>
+<h3 id="_46">专业解释</h3>
+<p>策略偏离指数的程度。</p>
+<h3 id="_47">老奶奶版</h3>
+<p>老师让你照着菜谱做。</p>
+<p>你改动越大，</p>
+<p>跟踪误差越大。</p>
+<hr />
+<h2 id="10-information-ratioir">10. 信息比率（Information Ratio，IR）</h2>
+<h3 id="_48">专业解释</h3>
+<p>每承担一份跟踪误差，</p>
+<p>获得多少超额收益。</p>
+<h3 id="_49">老奶奶版</h3>
+<p>偷偷改了菜谱。</p>
+<p>最后：</p>
+<p>到底有没有更好吃？</p>
+<p>改得值不值？</p>
+<hr />
+<h2 id="11-turnover">11. 换手率（Turnover）</h2>
+<h3 id="_50">专业解释</h3>
+<p>股票买卖频率。</p>
+<h3 id="_51">老奶奶版</h3>
+<p>天天换菜。</p>
+<p>时间、</p>
+<p>路费、</p>
+<p>交易成本都增加。</p>
+<hr />
+<h2 id="12-correlation">12. 相关性（Correlation）</h2>
+<h3 id="_52">专业解释</h3>
+<p>不同策略是否一起涨跌。</p>
+<h3 id="_53">老奶奶版</h3>
+<p>一家人最好：</p>
+<p>不要都靠同一份工作。</p>
+<p>一个失业，</p>
+<p>其他还能撑住。</p>
+<hr />
+<h1 id="_54">四、快速判断一个策略好不好</h1>
+<p>不要只看收益，</p>
+<p>至少同时看下面五件事。</p>
+<table>
+<thead>
+<tr>
+<th>关注问题</th>
+<th>对应指标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>能不能赚钱？</td>
+<td>年化收益</td>
+</tr>
+<tr>
+<td>亏起来痛不痛？</td>
+<td>最大回撤</td>
+</tr>
+<tr>
+<td>收益稳不稳？</td>
+<td>波动率、夏普</td>
+</tr>
+<tr>
+<td>靠不靠大盘？</td>
+<td>Alpha、Beta</td>
+</tr>
+<tr>
+<td>能不能和其他策略组合？</td>
+<td>相关性</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="_55">五、一张图记住所有策略</h1>
+<table>
+<thead>
+<tr>
+<th>策略</th>
+<th>最重要看什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CTA</td>
+<td>趋势、回撤</td>
+</tr>
+<tr>
+<td>市场中性</td>
+<td>Alpha、Beta</td>
+</tr>
+<tr>
+<td>指数增强</td>
+<td>超额收益、IR</td>
+</tr>
+<tr>
+<td>量化选股</td>
+<td>收益、回撤、风格暴露</td>
+</tr>
+<tr>
+<td>混合策略</td>
+<td>相关性、组合稳定性</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="_56">六、老奶奶版总口诀</h1>
+<blockquote>
+<p><strong>CTA：看会不会跟风。</strong><br />
+<strong>市场中性：看会不会比别人强。</strong><br />
+<strong>指数增强：看能不能比平均分高。</strong><br />
+<strong>量化选股：看会不会挑好苹果。</strong><br />
+<strong>混合策略：看几种赚钱方法放一起，是不是真的更稳。</strong></p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.top", "navigation.indexes", "navigation.expand", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
