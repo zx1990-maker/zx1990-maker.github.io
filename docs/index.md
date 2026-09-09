@@ -20,14 +20,6 @@
 
     [开始阅读](<TECH/Mathematical Statistics/Lecture2_Modeling Discrete Variables.md>)
 
--   **📈 量化研究**
-
-    ---
-
-    指增产品、量化策略评价与投研框架。
-
-    [开始阅读](TECH/量化实习/投研框架.md)
-
 -   **🧠 Data Science**
 
     ---
