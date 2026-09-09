@@ -11,7 +11,7 @@ repo_name: zx1990-maker.github.io
 # [完美精简版导航 - 只保留你的四大分类]
 nav:
   - 🏠 首页: index.md
-  - 💻 技术笔记:
+  - 💻 学习笔记:
     - 介绍: TECH/index.md
     - 我的第一篇博客文章: TECH/post1.md
     - Numerical Analysis:
