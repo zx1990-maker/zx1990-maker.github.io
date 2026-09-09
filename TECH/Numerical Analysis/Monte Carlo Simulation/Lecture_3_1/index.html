@@ -1,0 +1,3493 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="用直觉、公式和例子理解蒙特卡洛模拟、期望、方差、协方差、大数定律、中心极限定理和置信区间。">
+      
+      
+        <meta name="author" content="Zixuan">
+      
+      
+        <link rel="canonical" href="https://zx1990-maker.github.io/TECH/Numerical%20Analysis/Monte%20Carlo%20Simulation/Lecture_3_1/">
+      
+      
+        <link rel="prev" href="../../../post1/">
+      
+      
+        <link rel="next" href="../Lecture_3_2/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>随机模拟与基础统计：从德州扑克到中心极限定理 - 我的个人博客</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../../.." title="我的个人博客" class="md-header__button md-logo" aria-label="我的个人博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            我的个人博客
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              随机模拟与基础统计：从德州扑克到中心极限定理
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="orange"  aria-label="切换至夜间模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换至夜间模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="orange"  aria-label="切换至日间模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换至日间模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/zx1990-maker/zx1990-maker.github.io" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    zx1990-maker.github.io
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../../.." class="md-tabs__link">
+          
+  
+  
+    
+  
+  💻 学习笔记
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../SPORT/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  🏂 运动项目
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="我的个人博客" class="md-nav__button md-logo" aria-label="我的个人博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    我的个人博客
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/zx1990-maker/zx1990-maker.github.io" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    zx1990-maker.github.io
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../.." class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    💻 学习笔记
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    💻 学习笔记
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    博客介绍
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../post1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    我的第一篇博客文章
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1_4" id="__nav_1_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Numerical Analysis
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Numerical Analysis
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_4_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1_4_1" id="__nav_1_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Monte Carlo Method
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_4_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Monte Carlo Method
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture 3.1
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture 3.1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、这一讲的主线
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、德州扑克与蒙特卡洛模拟
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、德州扑克与蒙特卡洛模拟">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        用随机变量记录输赢
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、离散随机变量与期望
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、离散随机变量与期望">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        公平骰子
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        随机变量函数的期望
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、方差与标准差
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、方差与标准差">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        平移和缩放
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        公平骰子的方差
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、伯努利随机变量
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、协方差与独立性
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="六、协方差与独立性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        独立性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        零协方差不等于独立
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、连续随机变量
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        八、均匀分布
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        九、正态分布
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十、样本平均值为什么越来越稳定？
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十一、大数定律
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十二、中心极限定理
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十三、样本方差与标准误
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#95" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十四、95% 置信区间
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十五、回到扑克实验
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="十五、回到扑克实验">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#50" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        模拟 50 局
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10000" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        模拟 10,000 局
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#100" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么 100 次实验的极端范围更宽？
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十六、术语速查表
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十七、一页总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture_3_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture 3.2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_5" id="__nav_1_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mathematical Statistics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mathematical Statistics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Mathematical%20Statistics/Lecture2_Modeling%20Discrete%20Variables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_6" id="__nav_1_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Science 课程
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Data Science 课程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Data%20Science%E8%AF%BE%E7%A8%8B/%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习笔记
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1_6_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_6_2" id="__nav_1_6_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Structures
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Data Structures
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1_6_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_6_2_1" id="__nav_1_6_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dictionaries & Hashing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_1_6_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_6_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Dictionaries & Hashing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Data%20Science%E8%AF%BE%E7%A8%8B/Data%20Structures%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/Dictionaries%20%26%20Hashing/Lecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1_6_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_6_2_2" id="__nav_1_6_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tree
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_1_6_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_6_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tree
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Data%20Science%E8%AF%BE%E7%A8%8B/Data%20Structures%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/Tree/Recursion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recursion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../Leetcode/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LeetCode
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1_7" id="__nav_1_7_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    LeetCode
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Leetcode/Hashing%20%26%20Dictionary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hashing & Dictionary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1_7_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_7_3" id="__nav_1_7_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    H & D
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    H & D
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Leetcode/1.%20Two%20Sum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Two Sum
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Leetcode/349.%20Intersection%20of%20Two%20Arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    349. Intersection of Two Arrays
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Leetcode/128.%20Longest%20Consecutive%20Sequence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    128. Longest Consecutive Sequence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Leetcode/217.%20Contains%20Duplicate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    217. Contains Duplicate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Leetcode/387.%20First%20Unique%20Character%20in%20a%20String/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    387. First Unique Character in a String
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Leetcode/347.%20Top%20K%20Frequent%20Elements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    347. Top K Frequent Elements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Leetcode/Tree/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tree Algo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1_7_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_7_5" id="__nav_1_7_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tree Answer
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_7_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_7_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tree Answer
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Leetcode/20.%20Valid%20Parentheses/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    20. Valid Parentheses
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Leetcode/230.%20Kth%20Smallest%20Element%20in%20a%20BST/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    230. Kth Smallest Element in a BST
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Leetcode/236.%20Lowest%20Common%20Ancestor%20of%20a%20Binary%20Tree/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    236. Lowest Common Ancestor of a Binary Tree
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Leetcode/701.%20Insert%20into%20a%20Binary%20Search%20Tree/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    701. Insert into a Binary Search Tree
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Leetcode/98.%20Validate%20Binary%20Search%20Tree/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    98. Validate Binary Search Tree
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Leetcode/450.%20Delete%20Node%20in%20a%20BST/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    450. Delete Node in a BST
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Leetcode/105.%20Construct%20Binary%20Tree%20from%20Preorder%20and%20Inorder%20Traversal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    105. Construct Binary Tree from Preorder and Inorder Traversal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Leetcode/106.%20Construct%20Binary%20Tree%20from%20Inorder%20and%20Postorder%20Traversal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    106. Construct Binary Tree from Inorder and Postorder Traversal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Leetcode/297.%20Serialize%20and%20Deserialize%20Binary%20Tree/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    297. Serialize and Deserialize Binary Tree
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Leetcode/108.%20Convert%20Sorted%20Array%20to%20Binary%20Search%20Tree/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    108. Convert Sorted Array to Binary Search Tree
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Leetcode/110.%20Balanced%20Binary%20Tree/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    110. Balanced Binary Tree
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Leetcode/1382.%20Balance%20a%20Binary%20Search%20Tree/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1382. Balance a Binary Search Tree
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../SPORT/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🏂 运动项目
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🏂 运动项目
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Equestrian
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Equestrian
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../SPORT/Equestrian/CEA%E5%88%86%E7%BA%A7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CEA 分级
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Badminton
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Badminton
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../SPORT/Badminton/%E8%BF%90%E5%8A%A8%E5%BA%B7%E5%A4%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    常见损伤和运动康复
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Snowboarding
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Snowboarding
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../SPORT/Snowboarding/%E5%9B%BD%E5%86%85%E5%A4%96%E9%9B%AA%E5%9C%BA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    国内外滑雪场
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、这一讲的主线
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、德州扑克与蒙特卡洛模拟
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、德州扑克与蒙特卡洛模拟">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        用随机变量记录输赢
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、离散随机变量与期望
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、离散随机变量与期望">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        公平骰子
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        随机变量函数的期望
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、方差与标准差
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、方差与标准差">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        平移和缩放
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        公平骰子的方差
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、伯努利随机变量
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、协方差与独立性
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="六、协方差与独立性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        独立性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        零协方差不等于独立
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、连续随机变量
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        八、均匀分布
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        九、正态分布
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十、样本平均值为什么越来越稳定？
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十一、大数定律
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十二、中心极限定理
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十三、样本方差与标准误
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#95" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十四、95% 置信区间
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十五、回到扑克实验
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="十五、回到扑克实验">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#50" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        模拟 50 局
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10000" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        模拟 10,000 局
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#100" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么 100 次实验的极端范围更宽？
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十六、术语速查表
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十七、一页总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="_1">随机模拟与基础统计：从德州扑克到中心极限定理</h1>
+<blockquote>
+<p>本文对应 Chapter 3 的 Lecture 3.1。目标不是只记公式，而是理解：为什么随机模拟有效、误差如何衡量，以及为什么增加样本能让估计更稳定。</p>
+</blockquote>
+<h2 id="_2">一、这一讲的主线</h2>
+<p>这一讲把两个主题连在一起：</p>
+<ol>
+<li><strong>随机模拟（random simulation）</strong>：无法或不想精确枚举时，通过大量随机实验估计答案。</li>
+<li><strong>基础统计（basic statistics）</strong>：衡量模拟结果的随机波动，并判断增加样本量能提高多少精度。</li>
+</ol>
+<p>核心思想是：</p>
+<blockquote>
+<p>用样本平均值估计真实平均值；样本越多，估计通常越稳定。</p>
+</blockquote>
+<p>德州扑克只是引入问题的例子，同样的方法也用于民调、医学试验、金融风险模拟和机器学习评估。</p>
+<h2 id="_3">二、德州扑克与蒙特卡洛模拟</h2>
+<p>假设我们的两张起手牌已经固定，想求它在双人德州扑克中的真实获胜概率 <span class="arithmatex">\(p\)</span>。</p>
+<p>如果直接穷举，需要考虑：</p>
+<ul>
+<li>对手从剩余 50 张牌中拿 2 张；</li>
+<li>再从剩余 48 张牌中选 5 张公共牌。</li>
+</ul>
+<p>组合总数是</p>
+<div class="arithmatex">\[
+\binom{50}{2}\binom{48}{5}=2{,}097{,}572{,}400.
+\]</div>
+<p>因此可以采用<strong>蒙特卡洛模拟（Monte Carlo simulation）</strong>：</p>
+<ol>
+<li>洗牌；</li>
+<li>发给对手两张牌，再发五张公共牌；</li>
+<li>判断我们的牌是否获胜；</li>
+<li>重复 <span class="arithmatex">\(N\)</span> 次；</li>
+<li>用获胜次数除以 <span class="arithmatex">\(N\)</span>。</li>
+</ol>
+<h3 id="_4">用随机变量记录输赢</h3>
+<p>定义第 <span class="arithmatex">\(i\)</span> 局的结果：</p>
+<p>若第 <span class="arithmatex">\(i\)</span> 局获胜就记为 <span class="arithmatex">\(X_i=1\)</span>，否则记为 <span class="arithmatex">\(X_i=0\)</span>，因此</p>
+<div class="arithmatex">\[
+X_i\in\{0,1\}.
+\]</div>
+<p>这种只取 0 和 1 的变量叫做<strong>伯努利随机变量（Bernoulli random variable）</strong>。模拟 <span class="arithmatex">\(N\)</span> 次后，获胜概率的估计值为</p>
+<div class="arithmatex">\[
+\hat p_N=\frac{1}{N}\sum_{i=1}^{N}X_i.
+\]</div>
+<p>必须区分：</p>
+<ul>
+<li><span class="arithmatex">\(p\)</span>：真实获胜概率，是固定但未知的数；</li>
+<li><span class="arithmatex">\(\hat p_N\)</span>：模拟产生的估计值，是随机的。</li>
+</ul>
+<p>每次重新模拟，<span class="arithmatex">\(\hat p_N\)</span> 都可能不同。讲义中，一对 A 的实验只模拟 50 局时，估计可能从 72% 到 96%；模拟 10,000 局时，结果大约集中在 84% 到 86%。</p>
+<h2 id="_5">三、离散随机变量与期望</h2>
+<p><strong>离散随机变量（discrete random variable）</strong>只能取有限个或可数多个值。若 <span class="arithmatex">\(X\)</span> 可以取 <span class="arithmatex">\(x_1,x_2,\ldots\)</span>，并且</p>
+<div class="arithmatex">\[
+p_i=P(X=x_i),\qquad p_i\ge 0,\qquad \sum_i p_i=1,
+\]</div>
+<p>那么它的<strong>期望值（expected value）</strong>或<strong>均值（mean）</strong>是</p>
+<div class="arithmatex">\[
+\mu=E[X]=\sum_i x_i p_i.
+\]</div>
+<p>期望是按照概率加权的长期平均，并不一定是随机变量能够实际取到的值。</p>
+<h3 id="_6">公平骰子</h3>
+<p>公平六面骰子的每个点数概率都是 <span class="arithmatex">\(1/6\)</span>：</p>
+<div class="arithmatex">\[
+E[X]=\frac{1+2+3+4+5+6}{6}=\frac{7}{2}=3.5.
+\]</div>
+<p>骰子不能掷出 3.5；这个数表示重复投掷很多次以后，平均点数会接近 3.5。</p>
+<h3 id="_7">随机变量函数的期望</h3>
+<p>若对 <span class="arithmatex">\(X\)</span> 做变换 <span class="arithmatex">\(g(X)\)</span>，则</p>
+<div class="arithmatex">\[
+E[g(X)]=\sum_i g(x_i)p_i.
+\]</div>
+<p>特别重要的是<strong>期望的线性性质（linearity of expectation）</strong>：</p>
+<div class="arithmatex">\[
+E[aX+bY]=aE[X]+bE[Y].
+\]</div>
+<p>这个公式不要求 <span class="arithmatex">\(X\)</span> 和 <span class="arithmatex">\(Y\)</span> 独立。</p>
+<h2 id="_8">四、方差与标准差</h2>
+<p>平均值只描述中心，不能说明数据有多分散。<strong>方差（variance）</strong>定义为</p>
+<div class="arithmatex">\[
+\operatorname{var}(X)=E[(X-\mu)^2].
+\]</div>
+<p>它是“到平均值的平方距离”的平均。平方可以防止正负偏差相互抵消，也会让较大的偏差获得更高权重。</p>
+<p>更常用的计算公式是</p>
+<div class="arithmatex">\[
+\operatorname{var}(X)=E[X^2]-E[X]^2.
+\]</div>
+<p>推导如下：</p>
+<div class="arithmatex">\[
+E[(X-\mu)^2]=E[X^2]-2\mu E[X]+\mu^2=E[X^2]-\mu^2.
+\]</div>
+<p><strong>标准差（standard deviation）</strong>是方差的平方根：</p>
+<div class="arithmatex">\[
+\sigma=\sqrt{\operatorname{var}(X)}.
+\]</div>
+<p>标准差与原变量单位相同，因此通常比方差更容易解释。</p>
+<h3 id="_9">平移和缩放</h3>
+<p>若 <span class="arithmatex">\(Y=aX+b\)</span>，则</p>
+<div class="arithmatex">\[
+\operatorname{var}(aX+b)=a^2\operatorname{var}(X),\qquad
+\operatorname{sd}(aX+b)=|a|\operatorname{sd}(X).
+\]</div>
+<p>加上常数 <span class="arithmatex">\(b\)</span> 只是整体平移，不改变离散程度；乘以 <span class="arithmatex">\(a\)</span> 会把所有距离放大为原来的 <span class="arithmatex">\(|a|\)</span> 倍。</p>
+<h3 id="_10">公平骰子的方差</h3>
+<div class="arithmatex">\[
+E[X^2]=\frac{1^2+2^2+\cdots+6^2}{6}=\frac{91}{6},
+\]</div>
+<p>所以</p>
+<div class="arithmatex">\[
+\operatorname{var}(X)=\frac{91}{6}-\left(\frac{7}{2}\right)^2=\frac{35}{12},
+\qquad \sigma=\sqrt{\frac{35}{12}}\approx1.708.
+\]</div>
+<h2 id="_11">五、伯努利随机变量</h2>
+<p>若</p>
+<div class="arithmatex">\[
+P(X=1)=p,\qquad P(X=0)=1-p.
+\]</div>
+<p>则记作 <span class="arithmatex">\(X\sim\operatorname{Bernoulli}(p)\)</span>。因为 <span class="arithmatex">\(X^2=X\)</span>，所以</p>
+<div class="arithmatex">\[
+E[X]=p,\qquad \operatorname{var}(X)=p-p^2=p(1-p).
+\]</div>
+<p>扑克实验中，每局的输赢指标 <span class="arithmatex">\(X_i\)</span> 就是伯努利随机变量。</p>
+<h2 id="_12">六、协方差与独立性</h2>
+<p><strong>协方差（covariance）</strong>衡量两个变量是否倾向于一起变化：</p>
+<div class="arithmatex">\[
+\operatorname{cov}(X,Y)
+=E[(X-E[X])(Y-E[Y])]
+=E[XY]-E[X]E[Y].
+\]</div>
+<ul>
+<li>协方差大于 0：<span class="arithmatex">\(X\)</span> 较大时，<span class="arithmatex">\(Y\)</span> 也倾向较大；</li>
+<li>协方差小于 0：<span class="arithmatex">\(X\)</span> 较大时，<span class="arithmatex">\(Y\)</span> 倾向较小；</li>
+<li>协方差等于 0：没有线性的共同变化趋势。</li>
+</ul>
+<p>线性组合的方差是</p>
+<div class="arithmatex">\[
+\operatorname{var}(aX+bY)
+=a^2\operatorname{var}(X)+b^2\operatorname{var}(Y)
++2ab\operatorname{cov}(X,Y).
+\]</div>
+<h3 id="_13">独立性</h3>
+<p>离散变量 <span class="arithmatex">\(X,Y\)</span> <strong>独立（independent）</strong>，意味着对所有 <span class="arithmatex">\(i,j\)</span>，</p>
+<div class="arithmatex">\[
+P(X=x_i,Y=y_j)=P(X=x_i)P(Y=y_j).
+\]</div>
+<p>知道 <span class="arithmatex">\(X\)</span> 的取值不会改变我们对 <span class="arithmatex">\(Y\)</span> 的概率判断。独立性推出</p>
+<div class="arithmatex">\[
+E[XY]=E[X]E[Y],\qquad \operatorname{cov}(X,Y)=0.
+\]</div>
+<p>所以独立变量满足</p>
+<div class="arithmatex">\[
+\operatorname{var}(X+Y)=\operatorname{var}(X)+\operatorname{var}(Y).
+\]</div>
+<h3 id="_14">零协方差不等于独立</h3>
+<p>“独立”一定推出“协方差为零”，但反方向通常不成立。</p>
+<p>例如，让 <span class="arithmatex">\(X\)</span> 等概率取 <span class="arithmatex">\(-1,0,1\)</span>，并令 <span class="arithmatex">\(Y=X^2\)</span>。由对称性，<span class="arithmatex">\(E[X]=E[X^3]=0\)</span>，所以 <span class="arithmatex">\(\operatorname{cov}(X,Y)=0\)</span>。但 <span class="arithmatex">\(Y\)</span> 完全由 <span class="arithmatex">\(X\)</span> 决定，因此它们显然不独立。</p>
+<blockquote>
+<p>零协方差只排除了线性关系；独立性则排除了所有统计依赖关系。</p>
+</blockquote>
+<h2 id="_15">七、连续随机变量</h2>
+<p><strong>连续随机变量（continuous random variable）</strong>通过<strong>概率密度函数（probability density function, PDF）</strong> <span class="arithmatex">\(\rho(x)\)</span> 描述：</p>
+<div class="arithmatex">\[
+\rho(x)\ge0,\qquad \int_{-\infty}^{\infty}\rho(x)\,dx=1.
+\]</div>
+<p>区间概率等于密度曲线在该区间下方的面积：</p>
+<div class="arithmatex">\[
+P(a\le X\le b)=\int_a^b\rho(x)\,dx.
+\]</div>
+<p>对连续随机变量，<span class="arithmatex">\(P(X=x)=0\)</span>。因此 <span class="arithmatex">\(\rho(x)\)</span> 本身不是“取到 <span class="arithmatex">\(x\)</span> 的概率”，而是该位置附近的概率密集程度。</p>
+<p><strong>累积分布函数（cumulative distribution function, CDF）</strong>是</p>
+<div class="arithmatex">\[
+F(x)=P(X\le x)=\int_{-\infty}^{x}\rho(t)\,dt.
+\]</div>
+<p>连续情形下，期望改写为积分：</p>
+<div class="arithmatex">\[
+E[g(X)]=\int_{-\infty}^{\infty}g(x)\rho(x)\,dx.
+\]</div>
+<h2 id="_16">八、均匀分布</h2>
+<p>若 <span class="arithmatex">\(X\)</span> 在 <span class="arithmatex">\([a,b]\)</span> 上均匀分布，记作 <span class="arithmatex">\(X\sim U(a,b)\)</span>。它的密度为</p>
+<div class="arithmatex">\[
+\rho(x)=\frac{1}{b-a}\ (a\le x\le b),\qquad \rho(x)=0\ (x\notin[a,b]).
+\]</div>
+<p>对 <span class="arithmatex">\(U\sim U(0,1)\)</span>，</p>
+<div class="arithmatex">\[
+E[U]=\frac{1}{2},\qquad E[U^2]=\frac{1}{3},\qquad \operatorname{var}(U)=\frac{1}{12}.
+\]</div>
+<p>若希望把 <span class="arithmatex">\(U(0,1)\)</span> 转换成 <span class="arithmatex">\(U(a,b)\)</span>，使用</p>
+<div class="arithmatex">\[
+X=a+(b-a)U.
+\]</div>
+<p>乘以 <span class="arithmatex">\(b-a\)</span> 把区间长度从 1 拉伸到 <span class="arithmatex">\(b-a\)</span>，再加 <span class="arithmatex">\(a\)</span> 把起点平移到 <span class="arithmatex">\(a\)</span>。因此</p>
+<div class="arithmatex">\[
+E[X]=\frac{a+b}{2},\qquad \operatorname{var}(X)=\frac{(b-a)^2}{12}.
+\]</div>
+<p>如果 MATLAB 的 <code>rand</code> 返回 <span class="arithmatex">\(U(0,1)\)</span> 样本，那么 <code>a + (b-a)*rand</code> 返回 <span class="arithmatex">\(U(a,b)\)</span> 样本。</p>
+<h2 id="_17">九、正态分布</h2>
+<p>若 <span class="arithmatex">\(X\sim N(\mu,\sigma^2)\)</span>，则 <span class="arithmatex">\(X\)</span> 服从均值为 <span class="arithmatex">\(\mu\)</span>、方差为 <span class="arithmatex">\(\sigma^2\)</span> 的<strong>正态分布（normal distribution）</strong>：</p>
+<div class="arithmatex">\[
+\rho(x)=\frac{1}{\sigma\sqrt{2\pi}}
+\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right).
+\]</div>
+<ul>
+<li><span class="arithmatex">\(\mu\)</span> 决定中心；</li>
+<li><span class="arithmatex">\(\sigma\)</span> 决定曲线宽窄；</li>
+<li><span class="arithmatex">\(\sigma^2\)</span> 是方差。</li>
+</ul>
+<p><span class="arithmatex">\(N(0,1)\)</span> 称为<strong>标准正态分布（standard normal distribution）</strong>。若 <span class="arithmatex">\(Z\sim N(0,1)\)</span>，那么</p>
+<div class="arithmatex">\[
+\mu+\sigma Z\sim N(\mu,\sigma^2).
+\]</div>
+<p>MATLAB 的 <code>randn</code> 产生标准正态样本，所以 <code>mu + sigma*randn</code> 产生 <span class="arithmatex">\(N(\mu,\sigma^2)\)</span> 样本。</p>
+<p>正态分布的 <strong>68-95-99.7 规则</strong>是：约 68%、95% 和 99.7% 的结果分别位于均值的一、二、三个标准差范围内。</p>
+<h2 id="_18">十、样本平均值为什么越来越稳定？</h2>
+<p>设 <span class="arithmatex">\(X_1,\ldots,X_N\)</span> <strong>独立同分布（independent and identically distributed, iid）</strong>，满足</p>
+<div class="arithmatex">\[
+E[X_i]=\mu,\qquad \operatorname{var}(X_i)=\sigma^2.
+\]</div>
+<p>定义<strong>样本平均值（sample mean）</strong></p>
+<div class="arithmatex">\[
+A_N=\frac{1}{N}\sum_{i=1}^{N}X_i.
+\]</div>
+<p>利用期望的线性性质：</p>
+<div class="arithmatex">\[
+E[A_N]=\frac{1}{N}\sum_{i=1}^{N}E[X_i]=\mu.
+\]</div>
+<p>所以样本平均值不会系统性偏高或偏低，是总体均值的<strong>无偏估计量（unbiased estimator）</strong>。</p>
+<p>由于各个 <span class="arithmatex">\(X_i\)</span> 独立，交叉协方差为零：</p>
+<div class="arithmatex">\[
+\operatorname{var}(A_N)
+=\frac{1}{N^2}\sum_{i=1}^{N}\operatorname{var}(X_i)
+=\frac{\sigma^2}{N}.
+\]</div>
+<p>所以</p>
+<div class="arithmatex">\[
+\operatorname{sd}(A_N)=\frac{\sigma}{\sqrt N}.
+\]</div>
+<p>这是本讲最重要的公式：估计误差的典型大小按 <span class="arithmatex">\(1/\sqrt N\)</span> 缩小，而不是按 <span class="arithmatex">\(1/N\)</span> 缩小。</p>
+<ul>
+<li>样本量扩大 4 倍，误差约减半；</li>
+<li>样本量扩大 100 倍，误差约缩小到原来的 <span class="arithmatex">\(1/10\)</span>；</li>
+<li>想让误差缩小 10 倍，需要大约 100 倍的数据。</li>
+</ul>
+<p>这称为<strong>平方根收敛率（square-root convergence rate）</strong>。</p>
+<h2 id="_19">十一、大数定律</h2>
+<p><strong>大数定律（Law of Large Numbers, LLN）</strong>说，对任意 <span class="arithmatex">\(\varepsilon&gt;0\)</span>，</p>
+<div class="arithmatex">\[
+P(|A_N-\mu|&gt;\varepsilon)\longrightarrow0,\qquad N\to\infty.
+\]</div>
+<p>当样本量越来越大时，样本平均值偏离真实均值很多的概率越来越小。大数定律回答“是否会靠近真实值”，但没有具体描述误差的分布形状。</p>
+<h2 id="_20">十二、中心极限定理</h2>
+<p><strong>中心极限定理（Central Limit Theorem, CLT）</strong>说：若 <span class="arithmatex">\(X_i\)</span> 独立同分布，均值为 <span class="arithmatex">\(\mu\)</span>，方差为有限且非零的 <span class="arithmatex">\(\sigma^2\)</span>，那么当 <span class="arithmatex">\(N\)</span> 足够大时，</p>
+<div class="arithmatex">\[
+A_N\approx \mathcal{N}\left(\mu,\frac{\sigma^2}{N}\right).
+\]</div>
+<p>原始数据不需要服从正态分布；大量独立样本的平均值仍会逐渐接近正态分布。</p>
+<p>必须区分：</p>
+<ul>
+<li><span class="arithmatex">\(E[A_N]=\mu\)</span>：对每个 <span class="arithmatex">\(N\)</span> 都精确成立；</li>
+<li><span class="arithmatex">\(\operatorname{var}(A_N)=\sigma^2/N\)</span>：对每个 <span class="arithmatex">\(N\)</span> 都精确成立；</li>
+<li><span class="arithmatex">\(A_N\)</span> 近似正态：通常只在 <span class="arithmatex">\(N\)</span> 足够大时成立。</li>
+</ul>
+<h2 id="_21">十三、样本方差与标准误</h2>
+<p>观察到数据 <span class="arithmatex">\(x_1,\ldots,x_N\)</span> 后，定义样本均值</p>
+<div class="arithmatex">\[
+\bar x=\frac{1}{N}\sum_{i=1}^{N}x_i,
+\]</div>
+<p>以及<strong>样本方差（sample variance）</strong></p>
+<div class="arithmatex">\[
+s^2=\frac{1}{N-1}\sum_{i=1}^{N}(x_i-\bar x)^2.
+\]</div>
+<p>分母是 <span class="arithmatex">\(N-1\)</span>，因为我们已经用同一批数据估计了 <span class="arithmatex">\(\bar x\)</span>。偏差满足</p>
+<div class="arithmatex">\[
+\sum_{i=1}^{N}(x_i-\bar x)=0,
+\]</div>
+<p>所以只有 <span class="arithmatex">\(N-1\)</span> 个偏差能够自由变化，也就是 <span class="arithmatex">\(N-1\)</span> 个<strong>自由度（degrees of freedom）</strong>。这样定义可使 <span class="arithmatex">\(s^2\)</span> 成为 <span class="arithmatex">\(\sigma^2\)</span> 的无偏估计。</p>
+<p>用 <span class="arithmatex">\(s\)</span> 代替未知的 <span class="arithmatex">\(\sigma\)</span>，得到样本均值的<strong>标准误（standard error, SE）</strong>：</p>
+<div class="arithmatex">\[
+SE(\bar x)=\frac{s}{\sqrt N}.
+\]</div>
+<p>不要混淆：</p>
+<ul>
+<li>标准差 <span class="arithmatex">\(s\)</span>：描述单个观测值之间有多分散；</li>
+<li>标准误 <span class="arithmatex">\(s/\sqrt N\)</span>：描述样本均值这个估计量有多不稳定。</li>
+</ul>
+<h2 id="95">十四、95% 置信区间</h2>
+<p>根据中心极限定理，</p>
+<div class="arithmatex">\[
+Z=\frac{\bar x-\mu}{SE(\bar x)}
+\]</div>
+<p>近似服从 <span class="arithmatex">\(N(0,1)\)</span>。标准正态分布约有 95% 的概率位于 <span class="arithmatex">\(-1.96\)</span> 到 <span class="arithmatex">\(1.96\)</span> 之间，因此总体均值的大样本近似 <strong>95% 置信区间（95% confidence interval）</strong>为</p>
+<div class="arithmatex">\[
+\boxed{\bar x\pm1.96\frac{s}{\sqrt N}}.
+\]</div>
+<p>其中 <span class="arithmatex">\(1.96s/\sqrt N\)</span> 是<strong>误差界（margin of error）</strong>，也就是区间的半宽。</p>
+<p>正确解释是：如果反复进行整个抽样过程，并每次按同样方法构造区间，那么大约 95% 的区间会包含真实均值 <span class="arithmatex">\(\mu\)</span>。</p>
+<p>在经典统计学中，实验结束后 <span class="arithmatex">\(\mu\)</span> 是固定的，区间才是随机的。因此严格来说，不应把已经得到的一个区间解释为“<span class="arithmatex">\(\mu\)</span> 有 95% 的概率位于其中”。</p>
+<h2 id="_22">十五、回到扑克实验</h2>
+<p>每局输赢满足</p>
+<div class="arithmatex">\[
+X_i\sim\operatorname{Bernoulli}(p),\qquad
+E[X_i]=p,\qquad \operatorname{var}(X_i)=p(1-p).
+\]</div>
+<p>所以获胜比例近似满足</p>
+<div class="arithmatex">\[
+\hat p_N\approx N\left(p,\frac{p(1-p)}{N}\right).
+\]</div>
+<p>真实 <span class="arithmatex">\(p\)</span> 未知时，用 <span class="arithmatex">\(\hat p_N\)</span> 代替它：</p>
+<div class="arithmatex">\[
+SE(\hat p_N)\approx
+\sqrt{\frac{\hat p_N(1-\hat p_N)}{N}}.
+\]</div>
+<p>假设一对 A 的真实胜率约为 <span class="arithmatex">\(p=0.85\)</span>。</p>
+<h3 id="50">模拟 50 局</h3>
+<div class="arithmatex">\[
+SE(\hat p_{50})\approx\sqrt{\frac{0.85(0.15)}{50}}\approx0.0505.
+\]</div>
+<p>95% 范围的半宽约为 <span class="arithmatex">\(1.96\times0.0505=0.099\)</span>，因此</p>
+<div class="arithmatex">\[
+0.85\pm0.099=[0.751,0.949].
+\]</div>
+<p>也就是约 75.1% 到 94.9%。只模拟 50 局时，估计可能有很大波动。</p>
+<h3 id="10000">模拟 10,000 局</h3>
+<div class="arithmatex">\[
+SE(\hat p_{10{,}000})\approx
+\sqrt{\frac{0.85(0.15)}{10{,}000}}\approx0.00357.
+\]</div>
+<p>95% 范围的半宽约为 <span class="arithmatex">\(1.96\times0.00357=0.0070\)</span>，因此</p>
+<div class="arithmatex">\[
+0.85\pm0.007=[0.843,0.857].
+\]</div>
+<p>也就是约 84.3% 到 85.7%。</p>
+<h3 id="100">为什么 100 次实验的极端范围更宽？</h3>
+<p>中央 95% 范围描述一次估计的中央部分，本来就允许约 5% 的实验落在外面。重复 100 次，平均可能有约 5 次落在区间外；100 个结果中的最小值和最大值自然可能更极端。</p>
+<p>所以，<span class="arithmatex">\(N=50\)</span> 时理论中央范围约为 75.1%-94.9%，而 100 次实验实际观察到的极端范围是 72%-96%，二者并不矛盾。</p>
+<h2 id="_23">十六、术语速查表</h2>
+<table>
+<thead>
+<tr>
+<th>中文</th>
+<th>English</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>蒙特卡洛模拟</td>
+<td>Monte Carlo simulation</td>
+<td>用重复随机实验估计目标量</td>
+</tr>
+<tr>
+<td>随机变量</td>
+<td>random variable</td>
+<td>由随机实验结果决定的数值</td>
+</tr>
+<tr>
+<td>期望 / 均值</td>
+<td>expectation / mean</td>
+<td>概率加权的长期平均</td>
+</tr>
+<tr>
+<td>方差</td>
+<td>variance</td>
+<td>到均值的平方距离的平均</td>
+</tr>
+<tr>
+<td>标准差</td>
+<td>standard deviation</td>
+<td>单个结果的典型波动尺度</td>
+</tr>
+<tr>
+<td>协方差</td>
+<td>covariance</td>
+<td>两个变量的线性共同变化趋势</td>
+</tr>
+<tr>
+<td>独立同分布</td>
+<td>independent and identically distributed, iid</td>
+<td>各变量同分布且相互独立</td>
+</tr>
+<tr>
+<td>概率密度函数</td>
+<td>probability density function, PDF</td>
+<td>连续分布的概率密集程度</td>
+</tr>
+<tr>
+<td>累积分布函数</td>
+<td>cumulative distribution function, CDF</td>
+<td>落在某个值左侧的累计概率</td>
+</tr>
+<tr>
+<td>大数定律</td>
+<td>Law of Large Numbers, LLN</td>
+<td>样本平均值趋近真实均值</td>
+</tr>
+<tr>
+<td>中心极限定理</td>
+<td>Central Limit Theorem, CLT</td>
+<td>大样本平均值近似正态</td>
+</tr>
+<tr>
+<td>样本方差</td>
+<td>sample variance</td>
+<td>用样本估计总体方差</td>
+</tr>
+<tr>
+<td>标准误</td>
+<td>standard error, SE</td>
+<td>估计量的随机波动尺度</td>
+</tr>
+<tr>
+<td>置信区间</td>
+<td>confidence interval</td>
+<td>按固定覆盖率构造的参数区间</td>
+</tr>
+<tr>
+<td>自由度</td>
+<td>degrees of freedom</td>
+<td>能独立变化的信息数量</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_24">十七、一页总结</h2>
+<ol>
+<li>蒙特卡洛模拟通过大量随机实验估计难以精确计算的量。</li>
+<li>用 0-1 变量记录事件是否发生，则样本平均值就是事件概率的估计。</li>
+<li>方差衡量平方尺度上的波动，标准差衡量原单位下的典型波动。</li>
+<li>独立变量的方差可以相加；独立推出零协方差，但反向不成立。</li>
+<li>大数定律保证样本平均值靠近真实均值。</li>
+<li>中心极限定理说明大样本平均值近似正态。</li>
+<li>样本平均值的标准误按 <span class="arithmatex">\(1/\sqrt N\)</span> 缩小。</li>
+<li>大样本均值的 95% 置信区间约为 <span class="arithmatex">\(\bar x\pm1.96s/\sqrt N\)</span>。</li>
+<li>想把随机误差缩小到原来的 <span class="arithmatex">\(1/10\)</span>，通常要把独立样本量增加到原来的 100 倍。</li>
+</ol>
+<hr />
+<p><em>根据 Lecture 3.1《Random simulation and basic statistics》整理。</em></p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.indexes", "navigation.expand", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
