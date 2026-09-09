@@ -19,8 +19,8 @@ nav:
         - Lecture 3.1: TECH/Numerical Analysis/Monte Carlo Simulation/Lecture_3_1.md
         - Lecture 3.2: TECH/Numerical Analysis/Monte Carlo Simulation/Lecture_3_2.md
 
-      - Mathematical Statistics:
-        - Lecture 2: TECH/Mathematical Statistics/Lecture2_Modeling Discrete Variables.md
+    - Mathematical Statistics:
+      - Lecture 2: TECH/Mathematical Statistics/Lecture2_Modeling Discrete Variables.md
     - 私募基金实习: 
       - Enhanced Index Strategy: TECH/量化实习/指增产品评价指标理解.md
       - Quant Strategies: TECH/量化实习/量化策略与评价指标总结.md
