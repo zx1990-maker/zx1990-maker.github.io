@@ -12,6 +12,8 @@ nav:
       - 笔记首页: index.md
       - 博客介绍: TECH/index.md
       - 我的第一篇博客文章: TECH/post1.md
+      - Math Modeling:
+        - Dimension analysis: TECH/Math Modeling/Dimension Analysis.md
       - Numerical Analysis:
           - Monte Carlo Method:
               - Lecture 3.1: TECH/Numerical Analysis/Monte Carlo Simulation/Lecture_3_1.md
