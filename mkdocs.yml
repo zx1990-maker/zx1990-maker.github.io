@@ -51,14 +51,7 @@ nav:
               - 108. Convert Sorted Array to Binary Search Tree: TECH/Leetcode/108. Convert Sorted Array to Binary Search Tree.md
               - 110. Balanced Binary Tree: TECH/Leetcode/110. Balanced Binary Tree.md
               - 1382. Balance a Binary Search Tree: TECH/Leetcode/1382. Balance a Binary Search Tree.md
-  - 🏂 运动项目:
-      - 介绍: SPORT/index.md
-      - Equestrian:
-          - CEA 分级: SPORT/Equestrian/CEA分级.md
-      - Badminton:
-          - 常见损伤和运动康复: SPORT/Badminton/运动康复.md
-      - Snowboarding:
-          - 国内外滑雪场: SPORT/Snowboarding/国内外雪场.md
+
 
 theme:
   name: material
