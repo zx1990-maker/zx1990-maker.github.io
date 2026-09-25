@@ -4,6 +4,14 @@
 
 <div class="grid cards" markdown>
 
+-   **🏔️ Math Modeling**
+
+    ---
+
+    量纲分析、Drag force和Reynold Number 课程笔记。
+
+    [开始阅读](<TECH/Math Modeling/Dimension Analysis.md>)
+
 -   **📐 Numerical Analysis**
 
     ---
